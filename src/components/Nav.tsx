@@ -1,12 +1,21 @@
+"use client";
+import { useUser } from "@/app/context/user.context";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Nav = () => {
+  const { user } = useUser();
+
   return (
-    <div className="flex items-center space-x-5 p-4 bg-red-600">
-      <h1>Nav</h1>
+    <div className="flex items-center gap-3 bg-red-600 p-2">
+      <Link href={"/"}>Home</Link>
+      <Link href={"/registration"}>Sing UP</Link>
+      <Link href={"/admin"}>Admin</Link>
+      <Link href={"/seller"}>seller</Link>
       <div className="">
-        <Link href={"/registration"}>Sing UP</Link>
+        {user?.role === "user" && (
+          <Link href={"beCome-seller"}>Be come seller</Link>
+        )}
       </div>
     </div>
   );

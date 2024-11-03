@@ -7,11 +7,13 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { FaEyeSlash } from "react-icons/fa6";
 import { IoEye } from "react-icons/io5";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useUser } from "@/app/context/user.context";
 
 const SignUp = () => {
   const { mutate: handleUserLogin, isPending, isSuccess } = useUserLogin();
   const [visible, setVisible] = useState(false);
   const route = useRouter();
+  const { user, isLoading } = useUser();
   const {
     register,
     handleSubmit,
@@ -22,10 +24,12 @@ const SignUp = () => {
     handleUserLogin(data);
   };
   useEffect(() => {
+    localStorage.setItem("jwt", JSON.stringify(user?.email));
     if (isSuccess) {
       route.push("/");
     }
-  }, [isSuccess]);
+  }, [isSuccess, isLoading]);
+
   return (
     <div className=" w-full h-screen flex items-center justify-center">
       <div className="w-[50%] bg-slate-200 p-5">

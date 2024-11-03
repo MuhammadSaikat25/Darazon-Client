@@ -1,4 +1,3 @@
-// auth.hooks.ts
 import { loginUser } from "@/services/auth";
 import { TLoginInputs } from "@/types";
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
@@ -9,13 +8,13 @@ export const useUserLogin = (): UseMutationResult<any, Error, TLoginInputs> => {
     mutationKey: ["USER_LOGIN"],
     mutationFn: async (userData: TLoginInputs) => await loginUser(userData),
     onSuccess: () => {
-      toast.success("User login successful.",{
-        duration:1500
+      toast.success("User login successful.", {
+        duration: 1500,
       });
     },
     onError: (error) => {
-      toast.error(error.message,{
-        duration:1500
+      toast.error(error.message, {
+        duration: 1500,
       });
     },
   });
